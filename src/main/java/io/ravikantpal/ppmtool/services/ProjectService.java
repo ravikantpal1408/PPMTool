@@ -12,9 +12,7 @@ public class ProjectService {
     private ProjectRepository projectRepository;
 
     public Project saveOrUpdateProject(Project project){
-
-        // Logic
-
+        // Logic - In later stage
         return projectRepository.save(project);
     }
 }
