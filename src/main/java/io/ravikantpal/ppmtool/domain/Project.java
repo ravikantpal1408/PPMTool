@@ -1,106 +1,125 @@
 package io.ravikantpal.ppmtool.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
+
+
+
 
 @Entity
 public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
-    private String ProjectName;
+    @NotBlank(message = "Project name is required")
+    @NotNull(message = "Project name is required")
+    private String projectName;
 
-    private String ProjecIdentifier;
+    @NotBlank(message = "Project Identifier is required")
+    @NotNull(message = "Project Identifier is required")
+    @Size(min=4, max = 10, message = "Please use 4 - 10 character")
+    @Column(updatable = false,unique = true)
+    private String projecIdentifier;
 
+    @NotBlank(message = "Project Description is required ")
+    @NotNull(message = "Project Description is required ")
+    private String description;
 
-    private String Description;
+    @JsonFormat(pattern = "yyyy-mm-dd")
+    private Date startDate;
 
-    private Date StartDate;
+    @JsonFormat(pattern = "yyyy-mm-dd")
+    private Date endDate;
 
-    private Date EndDate;
+    @JsonFormat(pattern = "yyyy-mm-dd")
+    private Date createdAt;
 
-    private Date CreatedAt;
-
-    private Date UpdatedAt;
+    @JsonFormat(pattern = "yyyy-mm-dd")
+    private Date updatedAt;
 
     public Project() {
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getProjectName() {
-        return ProjectName;
+        return projectName;
     }
 
     public void setProjectName(String projectName) {
-        ProjectName = projectName;
+        this.projectName = projectName;
     }
 
     public String getProjecIdentifier() {
-        return ProjecIdentifier;
+        return projecIdentifier;
     }
 
     public void setProjecIdentifier(String projecIdentifier) {
-        ProjecIdentifier = projecIdentifier;
+        this.projecIdentifier = projecIdentifier;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 
     public Date getStartDate() {
-        return StartDate;
+        return startDate;
     }
 
     public void setStartDate(Date startDate) {
-        StartDate = startDate;
+        this.startDate = startDate;
     }
 
     public Date getEndDate() {
-        return EndDate;
+        return endDate;
     }
 
     public void setEndDate(Date endDate) {
-        EndDate = endDate;
+        this.endDate = endDate;
     }
 
     public Date getCreatedAt() {
-        return CreatedAt;
+        return createdAt;
     }
 
     public void setCreatedAt(Date createdAt) {
-        CreatedAt = createdAt;
+        this.createdAt = createdAt;
     }
 
     public Date getUpdatedAt() {
-        return UpdatedAt;
+        return updatedAt;
     }
 
     public void setUpdatedAt(Date updatedAt) {
-        UpdatedAt = updatedAt;
+        this.updatedAt = updatedAt;
     }
 
     @PrePersist
     protected void onCreate(){
-        this.CreatedAt = new Date();
+        this.createdAt = new Date();
     }
 
     @PreUpdate
     protected void onUpdate(){
-        this.UpdatedAt = new Date();
+        this.updatedAt = new Date();
     }
 
 
