@@ -1,28 +1,39 @@
 import axios from 'axios';
 import {GET_ERRORS} from "./types";
+import {GET_PROJECTS} from "./types";
 
 
 const baseURL = "http://localhost:8080/api";
 
 
 export const createProject = (project, history) => async dispatch => {
-    try {
-        axios.post(baseURL + "/project", project)
-            .then(res => {
-                // console.log(res)
-                history.push("/dashboard");
-            }).catch(error => {
-            // console.log("fata ", error)
-            // console.log(error.response.data)
+
+    await axios.post(baseURL + "/project", project)
+        .then(res => {
+            console.table(res);
+            history.push("/dashboard");
+        }).catch(error => {
             dispatch({
                 type: GET_ERRORS,
                 payload: error.response.data
             })
         });
-    } catch (e) {
+
+}
+
+
+export const getProjects = () => async dispatch => {
+    await axios.get("http://localhost:8080/api/project/all").then(res => {
+        // console.log(res.data)
+        dispatch({
+            type: GET_PROJECTS,
+            payload: res.data
+        });
+    }).catch(error => {
         dispatch({
             type: GET_ERRORS,
-            payload: e.response.data
+            payload: error.response.data
         })
-    }
-}
+    })
+
+};

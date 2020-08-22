@@ -1,39 +1,41 @@
-import React, {Component} from 'react';
-import {Link} from "react-router-dom";
+import React, { Component } from "react";
 
 class Header extends Component {
     render() {
         return (
-
-
             <nav className="navbar navbar-expand-sm navbar-dark bg-primary mb-4">
                 <div className="container">
-                    <Link className="navbar-brand" to="/dashboard">
+                    <a className="navbar-brand" href="Dashboard.html">
                         Personal Project Management Tool
-                    </Link>
-                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
-                        <span className="navbar-toggler-icon"/>
+                    </a>
+                    <button
+                        className="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#mobile-nav"
+                    >
+                        <span className="navbar-toggler-icon" />
                     </button>
 
                     <div className="collapse navbar-collapse" id="mobile-nav">
                         <ul className="navbar-nav mr-auto">
                             <li className="nav-item">
-                                <Link className="nav-link" to="/dashboard">
+                                <a className="nav-link" href="/dashboard">
                                     Dashboard
-                                </Link>
+                                </a>
                             </li>
                         </ul>
 
                         <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
-                                <Link className="nav-link " to="/register">
+                                <a className="nav-link " href="register.html">
                                     Sign Up
-                                </Link>
+                                </a>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="login">
+                                <a className="nav-link" href="login.html">
                                     Login
-                                </Link>
+                                </a>
                             </li>
                         </ul>
                     </div>
