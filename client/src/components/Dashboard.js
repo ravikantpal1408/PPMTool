@@ -16,10 +16,7 @@ class Dashboard extends Component {
                             <CreateReactButton/>
                             <br/>
                             <hr/>
-
                             <ProjectItems/>
-
-
                         </div>
                     </div>
                 </div>
