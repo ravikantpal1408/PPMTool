@@ -1,34 +1,32 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 // noinspection NpmUsedModulesInstalled
 import PropTypes from "prop-types";
 import ProjectItems from "./Project/ProjectItems";
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 import CreateProjectButton from "./Project/CreateProjectButton";
-import { getProjects } from "../actions/projectActions";
-
+import {getProjects} from "../actions/projectActions";
 
 
 class Dashboard extends Component {
     componentDidMount() {
-        this.props.getProjects().then(res=>{
-            console.log(res)
-        });
-
-        console.log(this.props.getProjects());
+        this.props.getProjects();
     }
 
     render() {
+        const {projects} = this.props.project;
+        // console.table(projects.length);
         return (
             <div className="projects">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
                             <h1 className="display-4 text-center">Projects</h1>
-                            <br />
-                            <CreateProjectButton />
-                            <br />
-                            <hr />
-                            <ProjectItems />
+                            <br/>
+                            <CreateProjectButton/>
+                            <br/>
+                            <hr/>
+                            {projects.length > 0 ? projects.map((project, i) => <ProjectItems key={i}
+                                                                                              project={project}/>) : null}
                         </div>
                     </div>
                 </div>
@@ -48,5 +46,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { getProjects }
+    {getProjects}
 )(Dashboard);
