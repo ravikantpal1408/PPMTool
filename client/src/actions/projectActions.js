@@ -1,6 +1,6 @@
 import axios from 'axios';
-import {GET_ERRORS} from "./types";
-import {GET_PROJECTS} from "./types";
+import {GET_ERRORS, GET_PROJECTS, GET_PROJECT} from "./types";
+
 
 
 const baseURL = "http://localhost:8080/api";
@@ -35,5 +35,21 @@ export const getProjects = () => async dispatch => {
             payload: error.response.data
         })
     })
+
+};
+
+
+export const getProject = (id, history) => async dispatch => {
+    await axios.get(`http://localhost:8080/api/project/${id}`).then(res=>{
+        dispatch({
+            type: GET_PROJECT,
+            payload: res.data
+        });
+    }).catch(error=>{
+        dispatch({
+            type: GET_PROJECT,
+            payload: error.response.data
+        });
+    });
 
 };
