@@ -8,7 +8,7 @@ const baseURL = "http://localhost:8080/api";
 
 export const createProject = (project, history) => async dispatch => {
 
-    await axios.post(baseURL + "/project", project)
+    await axios.post("/project", project)
         .then(res => {
             console.table(res);
             history.push("/dashboard");
@@ -23,7 +23,7 @@ export const createProject = (project, history) => async dispatch => {
 
 
 export const getProjects = () => async dispatch => {
-    await axios.get("http://localhost:8080/api/project/all").then(res => {
+    await axios.get("/project/all").then(res => {
         // console.log(res.data)
         dispatch({
             type: GET_PROJECTS,
@@ -40,7 +40,7 @@ export const getProjects = () => async dispatch => {
 
 
 export const getProject = (id, history) => async dispatch => {
-    await axios.get(`http://localhost:8080/api/project/${id}`).then(res=>{
+    await axios.get(`/project/${id}`).then(res=>{
         dispatch({
             type: GET_PROJECT,
             payload: res.data
@@ -55,9 +55,12 @@ export const getProject = (id, history) => async dispatch => {
 };
 
 export const deleteProject = id => async dispatch => {
-    await axios.delete(`http://localhost:8080/api/project/${id}`);
-    dispatch({
-        type: DELETE_PROJECT,
-        payload: id
-    });
+    if(window.confirm("Are you sure you want to delete the project ?")){
+        await axios.delete(`/project/${id}`);
+        dispatch({
+            type: DELETE_PROJECT,
+            payload: id
+        });
+    }
+
 };
